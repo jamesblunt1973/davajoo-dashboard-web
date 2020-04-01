@@ -1,0 +1,10 @@
+<div fxLayout="row" fxLayout.lt-lg="column">
+  <div *ngIf="data.images.length > 1" fxLayout="column" fxLayout.lt-lg="row">
+    <img class="thumb"
+         [ngClass]="{selected: selectedImg === img.fileName}"
+         *ngFor="let img of data.images"
+         [src]="imagePath + data.id + '/' + img.fileName"
+         (click)="selectedImg = img.fileName" />
+  </div>
+  <img class="image" [src]="imagePath + data.id + '/' + selectedImg" />
+</div>

@@ -1,0 +1,39 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$company-blue: ( 50: #dfe5f9, 100: #b1c1f4, 200: #839ae6, 300: #5974cc, 400: #3652aa, 500: #193282, 600: #102873, 700: #0b2166, 800: #061954, 900: #010f3d, A100: #8c9eff, A200: #536dfe, A400: #3d5afe, A700: #304ffe, contrast: ( 50: $dark-primary-text, 100: $dark-primary-text, 200: $dark-primary-text, 300: $light-primary-text, 400: $light-primary-text, 500: $light-primary-text, 600: $light-primary-text, 700: $light-primary-text, 800: $light-primary-text, 900: $light-primary-text, A100: $dark-primary-text, A200: $light-primary-text, A400: $light-primary-text, A700: $light-primary-text, ) );
+$company-green: ( 50: #f3f8e2, 100: #e8f6b5, 200: #dbf18d, 300: #cfea6d, 400: #bcdb4e, 500: #a7c638, 600: #8dab24, 700: #779215, 800: #5e7609, 900: #445603, A100: #a8f892, A200: #6dcd54, A400: #47a82d, A700: #2b8413, contrast: ( 50: $dark-primary-text, 100: $dark-primary-text, 200: $dark-primary-text, 300: $dark-primary-text, 400: $dark-primary-text, 500: $light-primary-text, 600: $light-primary-text, 700: $light-primary-text, 800: $light-primary-text, 900: $light-primary-text, A100: $dark-primary-text, A200: $light-primary-text, A400: $light-primary-text, A700: $light-primary-text, ) );
+
+$pardic-primary: mat-palette($mat-blue);
+$pardic-primaryLight: mat-palette($mat-light-blue);
+$pardic-accent: mat-palette($mat-green, 600);
+$pardic-error: mat-palette($mat-red);
+$pardic-warn: mat-palette($mat-orange);
+$pardic-theme: mat-light-theme($pardic-primary, $pardic-accent, $pardic-error);
+@include angular-material-theme($pardic-theme);
+
+
+$primary: mat-color($pardic-primary);
+$primaryBg: mat-color($pardic-primary, 50);
+$primaryLight: mat-color($pardic-primary, 300);
+$primaryDark: mat-color($pardic-primary, 900);
+
+$gray: mat-color(mat-palette($mat-gray));
+$lightGray: mat-color(mat-palette($mat-gray, 300));
+$veryLightGray: mat-color(mat-palette($mat-gray, 100));
+$darkGray: mat-color(mat-palette($mat-gray, 900));
+
+$accent: mat-color($pardic-accent);
+$warn: mat-color($pardic-warn);
+$error: mat-color($pardic-error);
+
+@mixin md-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+}
+
+.green {
+  color: $accent;
+}

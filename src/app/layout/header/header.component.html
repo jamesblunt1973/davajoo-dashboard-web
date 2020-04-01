@@ -1,0 +1,17 @@
+<mat-toolbar class="top" fxlayoyt="row" fxLayoutAlign="flex-start center" fxLayoutGap="10px">
+  <img src="/assets/images/logo.png" />
+  <a routerLink="/home">
+    <b class="title green">داشبورد</b>
+  </a>
+  <div class="menu">
+    <a routerLink="/prescriptions">نسخه‌ها</a>
+    <!--<a routerLink="/pharmacies">داروخانه‌ها</a>
+    <a routerLink="/patients">بیماران</a>-->
+  </div>
+  <span *ngIf="!userName" class="btn user-icon" routerLink="/auth/login">ورود به سامانه</span>
+  <div *ngIf="userName" class="user-icon" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <mat-icon svgIcon="account-circle" matListIcon></mat-icon>
+    <span>{{userName}}</span>
+    <small class="btn logout-btn" (click)="logout()">خروج</small>
+  </div>
+</mat-toolbar>

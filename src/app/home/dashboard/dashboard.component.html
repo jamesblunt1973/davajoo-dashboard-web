@@ -1,0 +1,106 @@
+<div fxLayout="row wrap" class="report-header">
+  <mat-card fxFlex="1 1 auto">
+    <p>تعداد کل نسخه ها</p>
+    <h1>{{dashboardInfo?.prescriptions || 0}}</h1>
+  </mat-card>
+  <mat-card fxFlex="1 1 auto">
+    <p>تعداد بیماران</p>
+    <h1>{{dashboardInfo?.patients || 0}}</h1>
+  </mat-card>
+  <mat-card fxFlex="1 1 auto">
+    <p>تعداد داروخانه ها</p>
+    <h1>{{dashboardInfo?.pharmacies || 0}}</h1>
+  </mat-card>
+  <mat-card fxFlex="1 1 auto">
+    <p>نسخه های تحویل شده</p>
+    <h1>{{dashboardInfo?.delivered || 0}}</h1>
+  </mat-card>
+</div>
+
+<div fxLayout="row wrap" class="charts-panel">
+
+  <div fxFlex="100%" fxFlex.gt-sm="50%">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            chartType="bar">
+    </canvas>
+  </div>
+
+  <div fxFlex="100%" fxFlex.gt-sm="50%">
+    <canvas baseChart
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            chartType="line">
+    </canvas>
+  </div>
+
+</div>
+
+<div class="panel">
+  <div class="header">
+    <h4>نسخه‌های در انتظار بررسی</h4>
+    <mat-icon svgIcon="calendar-today"></mat-icon>
+  </div>
+  <div class="content">
+    <div *ngIf="prescriptions.length === 0" fxLayout="row">
+      <h4>هیچ نسخه‌ی در انتظار رسیدگی موجود نیست.</h4>
+      <!--<a routerLink="/prescriptions">مشاهده گزارش نسخه‌ها</a>-->
+    </div>
+    <table class="report" cellpadding="0" cellspacing="0" border="1"  *ngIf="prescriptions.length > 0">
+      <thead>
+        <tr>
+          <th>ردیف</th>
+          <th>شناسه</th>
+          <th>تاریخ ارسال</th>
+          <th>شرح</th>
+          <th>نسخه</th>
+          <th>کاربر</th>
+          <th>داروخانه‌ها</th>
+          <th>نرم افزار</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prescription of prescriptions; let i = index">
+          <td align="center" data-title="ردیف">{{i + 1}}</td>
+          <td align="center" data-title="شناسه">
+            {{prescription.id}}
+          </td>
+          <td data-title="تاریخ ارسال">
+            {{prescription.createDate | momentJalaali:'jYYYY/jMM/jDD HH:mm'}}
+            <br />
+            {{prescription.elapsed}}
+          </td>
+          <td data-title="شرح">
+            {{prescription.description}}
+          </td>
+          <td data-title="نسخه" align="center">
+            <ng-container *ngIf="prescription.otc && prescription.otc.length">
+              <p *ngFor="let otc of prescription.otc">{{otc}}</p>
+            </ng-container>
+            <ng-container *ngIf="prescription.images && prescription.images.length">
+              <img [src]="imagePath + prescription.id + '/' + prescription.images[0].fileName" (click)="showImages(prescription)" />
+            </ng-container>
+          </td>
+          <td data-title="کاربر">
+            {{prescription.patient.name}}<br />
+            {{prescription.patient.nationalCode}}
+          </td>
+          <td data-title="داروخانه‌ها">
+            <p *ngFor="let pharmacy of prescription.pharmacies">
+              {{pharmacy.name}}
+            </p>
+          </td>
+          <td data-title="نرم افزار">
+            {{prescription.isPwa ? 'وب' : 'اندروید'}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

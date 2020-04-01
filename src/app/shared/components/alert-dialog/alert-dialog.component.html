@@ -1,0 +1,8 @@
+<h1 *ngIf="data.title" mat-dialog-title>{{data.title}}</h1>
+<div class="content" *ngIf="data.message" mat-dialog-content>
+  <mat-icon *ngIf="data.icon" [svgIcon]="data.icon" class="icon" [style.color]="data.iconColor"></mat-icon>
+  <p>{{data.message}}</p>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+  <button mat-raised-button color="primary" [mat-dialog-close]="true">تایید</button>
+</div>
